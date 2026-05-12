@@ -3,21 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <style>
-    body { font-family: Arial, sans-serif; margin: 16px; background: white; }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 16px;
+      background: white;
+      font-size: 16px;
+    }
+
     #xy-area {
-      position: relative; width: 400px; height: 400px;
-      border: 2px solid #333; background: #f5f5f5;
-      touch-action: none; cursor: crosshair; box-sizing: border-box;
+      position: relative;
+      width: 400px;
+      height: 400px;
+      border: 2px solid #333;
+      background: #f5f5f5;
+      touch-action: none;
+      cursor: crosshair;
+      box-sizing: border-box;
     }
+
     #xy-point {
-      position: absolute; width: 20px; height: 20px;
-      border-radius: 50%; background: #222;
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #222;
       transform: translate(-50%, -50%);
-      left: 50%; top: 50%; cursor: grab;
+      left: 50%;
+      top: 50%;
+      cursor: grab;
     }
+
     button {
-      padding: 8px 20px; font-size: 15px; cursor: pointer;
-      border-radius: 6px; border: 1px solid #333;
+      padding: 10px 22px;
+      font-size: 17px;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 6px;
+      border: 1px solid #333;
     }
   </style>
 </head>
@@ -27,12 +49,12 @@
 
   <!-- Y labels + NOM -->
   <div style="display:flex; flex-direction:row; align-items:stretch; margin-right:10px; height:400px;">
-    <div style="display:flex; flex-direction:column; justify-content:space-between; align-items:flex-end; height:400px; margin-right:8px; font-size:13px; color:#555; white-space:nowrap;">
+    <div style="display:flex; flex-direction:column; justify-content:space-between; align-items:flex-end; height:400px; margin-right:8px; font-size:15px; font-weight:600; color:#555; white-space:nowrap;">
       <span>Very useful (100)</span>
       <span>Somewhat useful (50)</span>
       <span>Not useful (0)</span>
     </div>
-    <div style="writing-mode:vertical-rl; transform:rotate(180deg); font-size:17px; font-weight:500; display:flex; align-items:center; justify-content:center; height:400px; margin-right:10px;">
+    <div style="writing-mode:vertical-rl; transform:rotate(180deg); font-size:20px; font-weight:700; display:flex; align-items:center; justify-content:center; height:400px; margin-right:10px;">
       NOM
     </div>
   </div>
@@ -46,15 +68,15 @@
       <div id="xy-point"></div>
     </div>
 
-    <div style="display:flex;justify-content:space-between;width:400px;margin-top:10px;font-size:13px;color:#555;">
+    <div style="display:flex;justify-content:space-between;width:400px;margin-top:10px;font-size:15px;font-weight:600;color:#555;">
       <span>Not useful (0)</span>
       <span>Somewhat useful (50)</span>
       <span>Very useful (100)</span>
     </div>
 
-    <div style="font-size:17px;font-weight:500;margin-top:10px;">RME</div>
+    <div style="font-size:20px;font-weight:700;margin-top:10px;">RME</div>
 
-    <div style="margin-top:16px;font-size:15px;color:#555;">
+    <div style="margin-top:16px;font-size:17px;color:#555;">
       X: <strong id="x-display">50</strong>
       &nbsp;&nbsp;|&nbsp;&nbsp;
       Y: <strong id="y-display">50</strong>
@@ -65,7 +87,7 @@
       <button id="reset-xy">Try again</button>
     </div>
 
-    <div id="xy-status" style="margin-top:12px;font-size:15px;font-weight:500;color:green;display:none;">
+    <div id="xy-status" style="margin-top:12px;font-size:17px;font-weight:600;color:green;display:none;">
       ✓ Response validated — you can continue.
     </div>
   </div>
@@ -100,12 +122,39 @@
     setPoint(x, y);
   }
 
-  area.addEventListener("mousedown", function(e) { if (!isValidated) { isDragging = true; updatePoint(e.clientX, e.clientY); } });
-  document.addEventListener("mousemove", function(e) { if (isDragging) updatePoint(e.clientX, e.clientY); });
-  document.addEventListener("mouseup", function() { isDragging = false; });
-  area.addEventListener("touchstart", function(e) { if (!isValidated) { isDragging = true; updatePoint(e.touches[0].clientX, e.touches[0].clientY); e.preventDefault(); } }, { passive: false });
-  area.addEventListener("touchmove", function(e) { if (isDragging) { updatePoint(e.touches[0].clientX, e.touches[0].clientY); e.preventDefault(); } }, { passive: false });
-  area.addEventListener("touchend", function() { isDragging = false; });
+  area.addEventListener("mousedown", function(e) {
+    if (!isValidated) {
+      isDragging = true;
+      updatePoint(e.clientX, e.clientY);
+    }
+  });
+
+  document.addEventListener("mousemove", function(e) {
+    if (isDragging) updatePoint(e.clientX, e.clientY);
+  });
+
+  document.addEventListener("mouseup", function() {
+    isDragging = false;
+  });
+
+  area.addEventListener("touchstart", function(e) {
+    if (!isValidated) {
+      isDragging = true;
+      updatePoint(e.touches[0].clientX, e.touches[0].clientY);
+      e.preventDefault();
+    }
+  }, { passive: false });
+
+  area.addEventListener("touchmove", function(e) {
+    if (isDragging) {
+      updatePoint(e.touches[0].clientX, e.touches[0].clientY);
+      e.preventDefault();
+    }
+  }, { passive: false });
+
+  area.addEventListener("touchend", function() {
+    isDragging = false;
+  });
 
   validateBtn.addEventListener("click", function() {
     isValidated = true;
@@ -113,7 +162,6 @@
     point.style.cursor = "default";
     status.style.display = "block";
 
-    // Envoie X et Y à LimeSurvey
     window.parent.postMessage({
       type: "xyData",
       payload: { x: currentX, y: currentY }
@@ -127,7 +175,6 @@
     point.style.cursor = "grab";
     setPoint(50, 50);
 
-    // Efface la réponse côté LimeSurvey
     window.parent.postMessage({ type: "xyReset" }, "*");
   });
 
