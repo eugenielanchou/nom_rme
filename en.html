@@ -40,6 +40,14 @@
       cursor: pointer;
       border-radius: 6px;
       border: 1px solid #333;
+      background: #f2f2f2;
+      color: #222;
+      transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+
+    #validate-xy:hover,
+    #reset-xy:hover {
+      background: #e6e6e6;
     }
   </style>
 </head>
@@ -68,21 +76,22 @@
       <div id="xy-point"></div>
     </div>
 
-    <div style="display:flex;justify-content:space-between;width:400px;margin-top:10px;font-size:15px;font-weight:600;color:#555;">
+    <!-- Petit espace sous l’axe -->
+    <div style="display:flex;justify-content:space-between;width:400px;margin-top:14px;font-size:15px;font-weight:600;color:#555;">
       <span>Not useful (0)</span>
       <span>Somewhat useful (50)</span>
       <span>Very useful (100)</span>
     </div>
 
-    <div style="font-size:20px;font-weight:700;margin-top:10px;">RME</div>
+    <div style="font-size:20px;font-weight:700;margin-top:12px;">RME</div>
 
-    <div style="margin-top:16px;font-size:17px;color:#555;">
-      X: <strong id="x-display">50</strong>
+    <div style="margin-top:18px;font-size:17px;color:#555;">
+      RME : <strong id="x-display">50</strong>
       &nbsp;&nbsp;|&nbsp;&nbsp;
-      Y: <strong id="y-display">50</strong>
+      NOM : <strong id="y-display">50</strong>
     </div>
 
-    <div style="margin-top:16px;display:flex;gap:10px;">
+    <div style="margin-top:18px;display:flex;gap:10px;">
       <button id="validate-xy">Validate</button>
       <button id="reset-xy">Try again</button>
     </div>
@@ -107,7 +116,8 @@
   var currentX = 50, currentY = 50;
 
   function setPoint(x, y) {
-    currentX = x; currentY = y;
+    currentX = x;
+    currentY = y;
     point.style.left = x + "%";
     point.style.top = (100 - y) + "%";
     xDisplay.textContent = x;
@@ -162,6 +172,14 @@
     point.style.cursor = "default";
     status.style.display = "block";
 
+    validateBtn.style.background = "#1a9e5c";
+    validateBtn.style.color = "white";
+    validateBtn.style.borderColor = "#1a9e5c";
+
+    resetBtn.style.background = "#d9d9d9";
+    resetBtn.style.color = "#666";
+    resetBtn.style.borderColor = "#bdbdbd";
+
     window.parent.postMessage({
       type: "xyData",
       payload: { x: currentX, y: currentY }
@@ -174,6 +192,14 @@
     point.style.background = "#222";
     point.style.cursor = "grab";
     setPoint(50, 50);
+
+    validateBtn.style.background = "#f2f2f2";
+    validateBtn.style.color = "#222";
+    validateBtn.style.borderColor = "#333";
+
+    resetBtn.style.background = "#f2f2f2";
+    resetBtn.style.color = "#222";
+    resetBtn.style.borderColor = "#333";
 
     window.parent.postMessage({ type: "xyReset" }, "*");
   });
