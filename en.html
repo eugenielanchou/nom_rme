@@ -19,7 +19,7 @@
     align-items: flex-start;
     gap: 0;
     font-family: Arial, sans-serif;
-    font-size: 14px;
+    font-size: 18px; /* was 16 */
     background: white;
     margin: 10px 40px 30px 40px;
   }
@@ -28,7 +28,7 @@
     display: flex;
     flex-direction: row;
     align-items: stretch;
-    margin-right: 8px;
+    margin-right: 10px;
     height: 400px;
   }
 
@@ -38,9 +38,9 @@
     justify-content: space-between;
     align-items: flex-end;
     height: 400px;
-    width: 120px;
-    margin-right: 5px;
-    font-size: 14px;
+    width: 150px;   /* widened again */
+    margin-right: 10px;
+    font-size: 18px;  /* was 16 */
     font-weight: 500;
     color: #555;
     white-space: nowrap;
@@ -64,13 +64,13 @@
   .y-axis-title {
     writing-mode: vertical-rl;
     transform: rotate(180deg);
-    font-size: 17px;
+    font-size: 21px; /* was 19 */
     font-weight: 700;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 400px;
-    margin-right: 12px;
+    margin-right: 14px;
     pointer-events: none;
     color: #de1818;
   }
@@ -146,37 +146,38 @@
 
   .axis-number {
     position: absolute;
-    font-size: 12px;
+    font-size: 16px; /* was 14 */
     font-weight: 600;
     color: #444;
     z-index: 6;
     pointer-events: none;
     background: white;
-    padding: 0 2px;
+    padding: 0 3px;
   }
 
   .not-relevant-label {
     position: absolute;
-    font-size: 14px;
+    font-size: 18px;  /* was 16 */
     font-weight: 500;
     color: #555;
     white-space: nowrap;
-    left: -50px;
-    bottom: -35px;
+    left: -80px;      /* move a bit further out for bigger text */
+    bottom: -42px;
     z-index: 6;
     pointer-events: none;
   }
 
   .x-labels {
-  position: relative;
+    position: relative;
     width: 400px;
-    height: 32px;
-    margin-top: 10px;
-    font-size: 14px;
+    height: 40px;      /* a bit taller */
+    margin-top: 14px;
+    font-size: 18px;   /* was 16 */
     font-weight: 500;
     color: #555;
     pointer-events: none;
   }
+
   .x-label-mid {
     position: absolute;
     left: 50%;
@@ -196,28 +197,28 @@
   }
 
   .x-axis-title {
-    font-size: 17px;
+    font-size: 21px;  /* was 19 */
     font-weight: 700;
-    margin-top: 1px;
+    margin-top: 6px;
     pointer-events: none;
     color: #de1818;
   }
 
   .score {
-    margin-top: 24px;
-    font-size: 13px;
+    margin-top: 26px;
+    font-size: 17px;  /* was 15 */
     color: #555;
   }
 
   .buttons {
-    margin-top: 8px;
+    margin-top: 12px;
     display: flex;
-    gap: 10px;
+    gap: 12px;
   }
 
   button {
-    padding: 8px 18px;
-    font-size: 14px;
+    padding: 10px 22px;
+    font-size: 17px;  /* was 15 */
     font-weight: 600;
     cursor: pointer;
     border-radius: 6px;
@@ -233,8 +234,8 @@
   }
 
   #xy-status {
-    margin-top: 12px;
-    font-size: 15px;
+    margin-top: 14px;
+    font-size: 18px;  /* was 16 */
     font-weight: 600;
     color: green;
     display: none;
@@ -286,11 +287,11 @@
       <div class="main-axis" style="top:50%; left:0; width:100%; height:1px;"></div>
       <div class="diag-line"></div>
 
-      <div class="axis-number" style="left:-30px; top:-5px;">100</div>
-      <div class="axis-number" style="left:-23px; top:50%; transform:translateY(-50%);">50</div>
-      <div class="axis-number" style="left:-12px; bottom:-18px;">0</div>
-      <div class="axis-number" style="left:50%; bottom:-18px; transform:translateX(-50%);">50</div>
-      <div class="axis-number" style="left:100%; bottom:-18px; transform:translateX(-50%);">100</div>
+      <div class="axis-number" style="left:-35px; top:-5px;">100</div>
+      <div class="axis-number" style="left:-27px; top:50%; transform:translateY(-50%);">50</div>
+      <div class="axis-number" style="left:-15px; bottom:-20px;">0</div>
+      <div class="axis-number" style="left:50%; bottom:-20px; transform:translateX(-50%);">50</div>
+      <div class="axis-number" style="left:100%; bottom:-20px; transform:translateX(-50%);">100</div>
 
       <div class="not-relevant-label">Not relevant</div>
       <div id="xy-point"></div>
