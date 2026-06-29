@@ -234,10 +234,22 @@
   }
 
   #xy-status {
-    margin-top: 14px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: max-content;
+    max-width: 320px;
+    text-align: center;
+    padding: 10px 16px;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid #1a9e5c;
+    border-radius: 8px;
     font-size: 16px;
     font-weight: 600;
     color: green;
+    z-index: 20;
+    pointer-events: none;
     display: none;
   }
 
@@ -295,6 +307,7 @@
 
       <div class="not-relevant-label">Not relevant</div>
       <div id="xy-point"></div>
+      <div id="xy-status">✓ Response validated — you can continue.</div>
     </div>
 
     <div class="x-labels">
@@ -312,8 +325,6 @@
       <button id="validate-xy" draggable="false" type="button">Validate</button>
       <button id="reset-xy" draggable="false" type="button">Try again</button>
     </div>
-
-    <div id="xy-status">✓ Response validated — you can continue.</div>
   </div>
 </div>
 
